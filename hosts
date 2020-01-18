@@ -1,0 +1,27 @@
+all:
+  hosts:
+  children:
+    freebsd:
+      hosts:
+        buchanan.jacobhouse.ca:
+        grant.jacobhouse.ca:
+        roosevelt.jacobhouse.ca:
+        truman.jacobhouse.ca:
+    bastion:
+      hosts:
+        truman.jacobhouse.ca:
+    webserver:
+      hosts:
+        roosevelt.jacobhouse.ca:
+    workstation:
+      hosts:
+        grant.jacobhouse.ca:
+    subversion_repo:
+      hosts:
+        buchanan.jacobhouse.ca:
+    devel:
+      hosts:
+        test-ansible.jacobhouse.ca:
+    sshable:
+      children:
+        devel:

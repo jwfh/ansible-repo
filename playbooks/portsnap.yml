@@ -1,0 +1,25 @@
+---
+- hosts: freebsd
+  order: shuffle
+  become: yes
+  tasks:
+    - name: Create portsnap statefile dir
+      block:
+      - name: portsnap statefile dir
+        file:
+          path: /var/ansible/state/portsnap
+          state: directory
+          mode: '0700'
+          owner: root
+          group: wheel
+      - name: portsnap statefile check
+        stat:
+          path: /var/ansible/state/portsnap/{{ ansible_date_time.date }}
+        register: state
+    - name: Install the portsnap ports tree
+      block:
+      - name: portsnap fetch
+        shell: portsnap fetch >> /var/ansible/state/portsnap/{{ ansible_date_time.date }}
+      - name: portsnap extract
+        shell: portsnap extract >> /var/ansible/state/portsnap/{{ ansible_date_time.date }}
+      when: state.stat.exists == False

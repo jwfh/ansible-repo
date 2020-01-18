@@ -1,0 +1,6 @@
+[submodule "roles/users"]
+	path = roles/users
+	url = https://github.com/jwfh/ansible-users
+[submodule "roles/sudoers"]
+	path = roles/sudoers
+	url = https://github.com/jwfh/ansible-sudo
