@@ -16,7 +16,7 @@
   git:
     repo: https://github.com/freebsd/freebsd-ports
     dest: /usr/ports
-  when: state.stat.exists == False || git_state.stat.exists == True
+  when: git_state.stat.exists == True or state.stat.exists == False
 - name: ports update
   block: 
     - name: portsnap statefile dir
@@ -30,4 +30,4 @@
       shell: portsnap fetch >> /var/ansible/state/portsnap/{{ ansible_date_time.date }}
     - name: portsnap extract
       shell: portsnap extract >> /var/ansible/state/portsnap/{{ ansible_date_time.date }}
-  when: state.stat.exists == True && git_state.stat.exists == False && portsnap_state.stat.exists == False
+  when: state.stat.exists == True and git_state.stat.exists == False and portsnap_state.stat.exists == False
