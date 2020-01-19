@@ -4,9 +4,9 @@
   stat:
     path: /var/db/pkg/local.sqlite
   register: pkg_db_state
-- name: false
-  shell: false
-  register: false
+- name: 'false'
+  shell: 'false'
+  register: 'false'
 - name: pkg sanity check
   shell: pkg -N
   register: pkg_state
