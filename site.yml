@@ -10,9 +10,8 @@
   become: yes
   roles:
     - users
-  include_vars:
-    file: vars/users.yml
-    name: users
+  vars:
+    include: vars/users.yml
 - hosts: ssh
   become: yes
   roles:
