@@ -19,6 +19,6 @@ all:
     devel:
       hosts:
         test-ansible.jacobhouse.ca:
-    sshable:
+    ssh:
       children:
         devel:
