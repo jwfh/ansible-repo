@@ -1,6 +1,5 @@
 ---
-- hosts: freebsd
-  order: shuffle
+- name: Configure ports tree
   become: yes
   tasks:
     - name: Create portsnap statefile dir
@@ -23,3 +22,8 @@
       - name: portsnap extract
         shell: portsnap extract >> /var/ansible/state/portsnap/{{ ansible_date_time.date }}
       when: state.stat.exists == False
+- name: Install pkgng
+  become: yes
+  tasks:
+    - name: make ports-mgmt/pkg
+      shell: if [ ! -e /var/db/pkg/local.sqlite ] || ! `pkg -N`; then make -C /usr/ports/ports-mgmt/pkg -DBATCH install clean; fi
