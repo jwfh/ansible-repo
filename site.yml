@@ -1,11 +1,8 @@
 ---
 - hosts: freebsd
+  become: yes
   roles:
     - ports_pkgng
-#- hosts: bastion
-#  become: yes
-#  roles:
-#    - bastion
 - hosts: ssh
   become: yes
   roles:
@@ -18,6 +15,12 @@
     - sudoers
   vars_files:
     - vars/sudoers.yml
+- hosts: freebsd
+  become: yes
+  roles:
+    - pkg_install
+  vars_files:
+    - vars/always_install.yml
 #- hosts: bastion
 #  become: yes
 #  roles:

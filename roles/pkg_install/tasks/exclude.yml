@@ -1,0 +1,5 @@
+---
+- name: "Removing package '{{item}}' from the system"
+  portinstall:
+    name: '{{item}}'
+    state: absent

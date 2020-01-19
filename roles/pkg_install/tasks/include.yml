@@ -1,0 +1,5 @@
+---
+- name: "Adding package '{{item}}' to the system"
+  portinstall:
+    name: '{{item}}'
+    state: present

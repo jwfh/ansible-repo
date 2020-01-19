@@ -1,2 +1,4 @@
 ---
-# defaults file for pkg_install
+include_packages: []
+exclude_packages: []
+use_portstree: false
