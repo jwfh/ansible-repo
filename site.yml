@@ -11,19 +11,13 @@
   roles:
     - users
   vars:
-    include: vars/users.yml
+    - include: vars/users.yml
 - hosts: ssh
   become: yes
   roles:
     - sudoers
   vars:
-    sudo_defaults:
-      - defaults: env_reset
-      - defaults: secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-    sudo_users:
-      - name: '%wheel'
-        nopasswd: yes
-    sudo_sudoers_d_path: /usr/local/etc/sudoers.d
+    - include: vars/sudoers.yml
 #- hosts: bastion
 #  become: yes
 #  roles:
