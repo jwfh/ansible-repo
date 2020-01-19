@@ -2,7 +2,7 @@
 
 - name: ports check
   stat:
-    path: /usr/ports
+    path: /usr/ports/README
   register: state
 - name: ports git check
   stat:
