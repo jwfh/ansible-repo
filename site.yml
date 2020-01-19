@@ -10,14 +10,14 @@
   become: yes
   roles:
     - users
-  vars:
-    - include: vars/users.yml
+  vars_files:
+    - vars/users.yml
 - hosts: ssh
   become: yes
   roles:
     - sudoers
-  vars:
-    - include: vars/sudoers.yml
+  vars_files:
+    - vars/sudoers.yml
 #- hosts: bastion
 #  become: yes
 #  roles:
