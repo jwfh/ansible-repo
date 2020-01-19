@@ -6,6 +6,7 @@
   register: pkg_db_state
 - name: 'false'
   shell: 'false'
+  ignore_errors: yes
   register: 'false'
 - name: pkg sanity check
   shell: pkg -N
