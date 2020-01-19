@@ -9,4 +9,4 @@
   register: pkg_state
 - name: make ports-mgmt/pkg
   shell: make -C /usr/ports/ports-mgmt/pkg -DBATCH install clean
-  when: pkg_db_state.stat.exists == False or pkg_state.rc == 0
+  when: pkg_db_state.stat.exists == False or pkg_state.rc != 0
