@@ -10,20 +10,9 @@
   become: yes
   roles:
     - users
-  vars:
-    users:
-      - username: jwhouse
-        name: Jacob William House
-        uid: 222830
-        groups: ["wheel", "network", "operator"]
-        authorized_keys:
-          - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC0x/q7Avwy2OKgkidDGokS61rjbSAjjCl1tDSueVBDBuk7zxXCZe/ww/NFDNTf6A0s/pCTIGnthz7QblJSEGKvO9UHZ0mIXWLLbAnhiB5vEylXR2ld3uAwkP+u2wxdoIo3qtTZPWKtWteRGbZa/BJCXljiYV8x95q1ly78r6eiKxf5cgBuxhilhZxMweSISJyi6p1ow1fViuzxuVDlG42FpQrU9vO5VaGLZyQO6FiPDe+Vs8U4EFV1Vq3/rv660vH3bKnxSpnA1n78EmBEP+UvVYCcuOdn/zWp0MO85t+E4jIbv7hAGKTGCGKU0kw5VC7TG2oG98PlLqvZIYozsBWKTjRdsUMC6ctudLmoUyKRPycSg7uqaS/QnkqKnU5YMi0XA1UpVdjsm+RCnZwHYTjH59trjS95M3cc8s5QkyTLwh0/fGnToxii/MkAYID09nJfmtdB6jqM1+JGohoVCM13tPYUbN4fhrzIRG1JLRDBf7+P8V74UuAjlmYpuxNsdrqvkWjEBX9UfPmth7fUV4zgjlFNF31pTcJ/I5u9aH/rXgtnrtZ5QHhgAby3k2T3SFBEQ7TeR9o/Qh8YGDrX5o8tS0TWRmm2mBt/XuuLSNSETb9Yr2aNiJKvereMaUtK5m3mQtbvGf6TjAMKt0ZZaUX+EgvQEDD6xV1Nx3Nm5ZCO2w== me@jwfh.ca_2019-10-09"
-      - username: noahgallant
-        name: Noah Albert Gallant
-        uid: 213815
-    users_home: /usr/home
-    users_home_mode: "0700"
-    users_shell: /bin/sh
+  include_vars:
+    file: vars/users.yml
+    name: users
 - hosts: ssh
   become: yes
   roles:
@@ -33,7 +22,7 @@
       - defaults: env_reset
       - defaults: secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
     sudo_users:
-      - name: "%wheel"
+      - name: '%wheel'
         nopasswd: yes
     sudo_sudoers_d_path: /usr/local/etc/sudoers.d
 #- hosts: bastion
