@@ -1,6 +1,7 @@
 ---
 - hosts: freebsd
-  import_playbook: playbooks/portsnap.yml
+  roles:
+    - ports_pkgng
 #- hosts: bastion
 #  become: yes
 #  roles:
