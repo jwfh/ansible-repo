@@ -1,3 +1,20 @@
 ---
 include_packages:
-  - devel/gmake
+  - security/sudo
+  - devel/git
+  - editors/vim
+  - shells/bash
+  - shells/zsh
+  - shells/fish
+  - sysutils/htop
+  - security/openssl
+  - sysutils/tmux
+  - sysutils/screen
+  - sysutils/fusefs-ntfs
+  - sysutils/fusefs-sshfs
+  - textproc/jq
+  - lang/gawk
+  - lang/nawk
+  - textproc/gsed
+  - sysutils/neofetch
+  - net/wol

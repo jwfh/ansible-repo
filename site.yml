@@ -21,6 +21,12 @@
     - pkg_install
   vars_files:
     - vars/always_install.yml
+- hosts: workstation
+  become: yes
+  roles:
+    - pkg_install
+  vars_files:
+    - vars/workstation_install.yml
 #- hosts: bastion
 #  become: yes
 #  roles:

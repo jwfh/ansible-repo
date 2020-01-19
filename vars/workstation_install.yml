@@ -1,0 +1,24 @@
+---
+include_packages:
+  - devel/llvm80
+  - devel/llvm90
+  - lang/rust
+  - devel/meson
+  - x11/libinput
+  - emulators/virtualbox-ose
+  - www/chromium
+  - sysutils/iocage
+  - x11-wm/i3
+  - x11/i3status
+  - sysutils/conky
+  - x11/polybar
+  - x11/xscreensaver
+  - java/intellij
+  - multimedia/ffmpeg
+  - multimedia/mplayer
+  - multimedia/vlc
+  - graphics/evince
+  - x11-fm/nautilus
+  - editors/gedit
+  - graphics/ImageMagick6
+  - textproc/bat
