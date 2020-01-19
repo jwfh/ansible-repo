@@ -1,0 +1,33 @@
+---
+
+- name: ports check
+  stat:
+    path: /usr/ports
+  register: state
+- name: ports git check
+  stat:
+    path: /usr/ports/.git
+  register: git_state
+- name: portsnap statefile check
+  stat:
+    path: /var/ansible/state/portsnap/{{ ansible_date_time.date }}
+  register: portsnap_state
+- name: git pull
+  git:
+    repo: https://github.com/freebsd/freebsd-ports
+    dest: /usr/ports
+  when: state.stat.exists == False || git_state.stat.exists == True
+- name: ports update
+  block: 
+    - name: portsnap statefile dir
+      file:
+        path: /var/ansible/state/portsnap
+        state: directory
+        mode: '0700'
+        owner: root
+        group: wheel
+    - name: portsnap fetch
+      shell: portsnap fetch >> /var/ansible/state/portsnap/{{ ansible_date_time.date }}
+    - name: portsnap extract
+      shell: portsnap extract >> /var/ansible/state/portsnap/{{ ansible_date_time.date }}
+  when: state.stat.exists == True && git_state.stat.exists == False && portsnap_state.stat.exists == False
