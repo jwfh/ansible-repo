@@ -1,7 +1,7 @@
 ---
 - name: Install packages
   include_tasks: install.yml
-  with_items: '{{include_packages}}'
+  with_items: '{{ include_packages }}'
 - name: Remove packages
   include_tasks: deinstall.yml
-  with_items: '{{exclude_packages}}'
+  with_items: '{{ exclude_packages }}'
