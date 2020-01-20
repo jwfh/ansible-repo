@@ -5,7 +5,7 @@
   register: git_state
 - name: portsnap statefile check
   stat:
-    path: /var/ansible/state/portsnap/{{ ansible_date_time.date }}
+    path: /var/ansible/state/portsnap/{{ ansible_date_time.date }}.log
   register: portsnap_state
 - name: git pull
   git:
@@ -22,14 +22,16 @@
         owner: root
         group: wheel
     - name: portsnap fetch
-      shell: portsnap fetch >> /var/ansible/state/portsnap/{{ ansible_date_time.date }}.tmp
+      shell: portsnap fetch 2>&1 | tee -a /var/ansible/state/portsnap/{{ ansible_date_time.date }}.tmp
       register: portsnap_fetch
     - name: portsnap extract
-      shell: portsnap extract >> /var/ansible/state/portsnap/{{ ansible_date_time.date }}.tmp
+      shell: portsnap extract 2>&1 | tee -a /var/ansible/state/portsnap/{{ ansible_date_time.date }}.tmp
       register: portsnap_extract
-      when: portsnap_fetch.rc == 0
     - name: save statefile
-      shell: mv /var/ansible/state/portsnap/{{ ansible_date_time.date }}.tmp /var/ansible/state/portsnap/{{ ansible_date_time.date }}
+      shell: cat /var/ansible/state/portsnap/{{ ansible_date_time.date }}.tmp >> /var/ansible/state/portsnap/{{ ansible_date_time.date }}.log
+      when: portsnap_fetch.rc == 0 and portsnap_extract.rc == 0
+    - name: remove temp statefile
+      shell: rm -f /var/ansible/state/portsnap/{{ ansible_date_time.date }}.tmp
       when: portsnap_fetch.rc == 0 and portsnap_extract.rc == 0
   when: git_state.stat.exists == False and portsnap_state.stat.exists == False
 - name: copy ports options
