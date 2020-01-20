@@ -34,14 +34,14 @@
   when: git_state.stat.exists == False and portsnap_state.stat.exists == False
 - block:
     - name: lookup ports options
-      debug: msg={{ lookup('fileglob', '../../files/var/db/ports/*') }}
+      debug: msg={{ lookup('fileglob', '../../../files/var/db/ports/*') }}
     - name: copy ports options
       copy:
         src: '{{ item }}'
         dest: /var/db/ports/
         owner: root
       with_fileglob:
-        - ../../files/var/db/ports/*
+        - ../../../files/var/db/ports/*
 - name: install portmaster
   portinstall:
     name: ports-mgmt/portmaster
