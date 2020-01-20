@@ -1,6 +1,7 @@
 ---
 include_packages:
   - security/sudo
+  - sysutils/htop
   - lang/python37
   - lang/python38
   - devel/git
@@ -8,7 +9,6 @@ include_packages:
   - shells/bash
   - shells/zsh
   - shells/fish
-  - sysutils/htop
   - security/openssl
   - sysutils/tmux
   - sysutils/screen

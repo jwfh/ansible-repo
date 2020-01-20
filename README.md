@@ -1,7 +1,7 @@
 Run on master:
 
 ```shell
-git clone https://github.com/jwfh/ansible-repo /usr/local/etc/ansible
+git clone --recursive https://github.com/jwfh/ansible-repo /usr/local/etc/ansible
 ```
 
 Run on each host:
