@@ -22,3 +22,5 @@
       shell: for i in $(pkg query -g %n 'py36-*'); do pkg set -yn ${i}:py37-${i#py36-}; done
     - name: Re-install changed dependencies
       shell: pkg upgrade -y
+    - name: portmaster build
+      shell: portmaster -BaDfGRv --no-confirm -m BATCH=yes 2>&1 | tee -a /var/ansible/state/portmaster.log
