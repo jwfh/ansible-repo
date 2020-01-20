@@ -22,7 +22,13 @@
         owner: root
         group: wheel
     - name: portsnap fetch
-      shell: portsnap fetch >> /var/ansible/state/portsnap/{{ ansible_date_time.date }}
+      shell: portsnap fetch >> /var/ansible/state/portsnap/{{ ansible_date_time.date }}.tmp
+      register: portsnap_fetch
     - name: portsnap extract
-      shell: portsnap extract >> /var/ansible/state/portsnap/{{ ansible_date_time.date }}
+      shell: portsnap extract >> /var/ansible/state/portsnap/{{ ansible_date_time.date }}.tmp
+      register: portsnap_extract
+      when: portsnap_fetch.rc == 0
+    - name: save statefile
+      shell: mv /var/ansible/state/portsnap/{{ ansible_date_time }}.tmp /var/ansible/state/portsnap/{{ ansible_date_time }}
+      when: portsnap_fetch.rc == 0 and portsnap_extract.rc == 0
   when: git_state.stat.exists == False and portsnap_state.stat.exists == False
