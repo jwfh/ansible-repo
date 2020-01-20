@@ -1,5 +1,4 @@
 ---
-# tasks file for pkg_install
 - name: Install packages
   include_tasks: install.yml
   with_items: '{{include_packages}}'

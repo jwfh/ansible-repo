@@ -1,6 +1,8 @@
 ---
 include_packages:
   - security/sudo
+  - lang/python37
+  - lang/python38
   - devel/git
   - editors/vim
   - shells/bash

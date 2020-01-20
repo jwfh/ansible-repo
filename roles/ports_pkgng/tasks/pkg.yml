@@ -10,3 +10,15 @@
 - name: make ports-mgmt/pkg
   shell: make -C /usr/ports/ports-mgmt/pkg -DBATCH install clean
   when: pkg_db_state.stat.exists == False or pkg_state.rc != 0
+- name: Update pkg
+  block:
+    - name: pkg update
+      shell: pkg update
+    - name: pkg upgrade
+      shell: pkg upgrade -y
+- name: Updates
+  block:
+    - name: Python packages
+      shell: for i in $(pkg query -g %n 'py36-*'); do pkg set -yn ${i}:py37-${i#py36-}; done
+    - name: Re-install changed dependencies
+      shell: pkg upgrade -y

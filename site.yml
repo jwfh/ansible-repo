@@ -20,13 +20,13 @@
   roles:
     - pkg_install
   vars_files:
-    - vars/always_install.yml
+    - vars/freebsd_pkg_install.yml
 - hosts: workstation
   become: yes
   roles:
     - pkg_install
   vars_files:
-    - vars/workstation_install.yml
+    - vars/workstation_pkg_install.yml
 #- hosts: bastion
 #  become: yes
 #  roles:
