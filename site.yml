@@ -3,7 +3,7 @@
   gather_facts: false
   tasks:
     - name: boostrap pkg
-      shell: env ASSUME_ALWAYS_YES=YES pkg install ports-mgmt/pkg security/sudo lang/python37
+      raw: env ASSUME_ALWAYS_YES=YES pkg install ports-mgmt/pkg security/sudo lang/python37
 # - hosts: freebsd
 #   roles:
 #     - ports_pkgng
