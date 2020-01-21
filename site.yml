@@ -1,32 +1,32 @@
 ---
 - hosts: freebsd
-  become: yes
-  roles:
-    - ports_pkgng
-- hosts: ssh
-  become: yes
-  roles:
-    - users
-  vars_files:
-    - vars/users.yml
-- hosts: ssh
-  become: yes
-  roles:
-    - sudoers
-  vars_files:
-    - vars/sudoers.yml
-- hosts: freebsd
-  become: yes
-  roles:
-    - pkg_install
-  vars_files:
-    - vars/freebsd_pkg_install.yml
-- hosts: workstation
-  become: yes
-  roles:
-    - pkg_install
-  vars_files:
-    - vars/workstation_pkg_install.yml
+  gather_info: false
+  tasks:
+    - name: boostrap pkg
+      shell: env ASSUME_ALWAYS_YES=YES pkg install ports-mgmt/pkg security/sudo lang/python37
+# - hosts: freebsd
+#   roles:
+#     - ports_pkgng
+# - hosts: ssh
+#   roles:
+#     - users
+#   vars_files:
+#     - vars/users.yml
+# - hosts: ssh
+#   roles:
+#     - sudoers
+#   vars_files:
+#     - vars/sudoers.yml
+# - hosts: freebsd
+#   roles:
+#     - pkg_install
+#   vars_files:
+#     - vars/freebsd_pkg_install.yml
+# - hosts: workstation
+#   roles:
+#     - pkg_install
+#   vars_files:
+#     - vars/workstation_pkg_install.yml
 #- hosts: bastion
 #  become: yes
 #  roles:
