@@ -1,6 +1,6 @@
 ---
 - hosts: freebsd
-  gather_info: false
+  gather_facts: false
   tasks:
     - name: boostrap pkg
       shell: env ASSUME_ALWAYS_YES=YES pkg install ports-mgmt/pkg security/sudo lang/python37
